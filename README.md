@@ -52,3 +52,5 @@ BUILD_ABI=armeabi-v7a,arm64-v8a make debug
 ```
 
 Java、Android SDK / NDK 和完整构建步骤见 `.github/workflows/sky-wuji-build.yml`。正式 APK 使用项目独立签名；自行编译请使用自己的签名，不包含维护者的签名私钥。
+
+发布构建复用同文 3.3.12 官方 APK 中未经修改的原生引擎库，下载时校验固定 SHA-256；Java/Kotlin 程序和本项目配置从本仓库构建。引擎对应源码由本仓库的 Git 子模块固定，获取完整源码请使用 `git clone --recursive`。不运行 `script/fetch-upstream-native.py`、保持 `app/prebuilt` 不存在时，`make debug` / `make release` 会从这些源码编译原生引擎。
