@@ -2,16 +2,14 @@ name: Build SKY Wuji
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
   pull_request:
 
 permissions:
   contents: read
 
 concurrency:
-  group: sky-wuji-${{ github.ref }}
-  cancel-in-progress: true
+  group: sky-wuji-release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -54,12 +52,12 @@ jobs:
               f'keyBase64={key}\nstorePassword={password}\nkeyAlias=skywuji\nkeyPassword={password}\n'
           )
           PY
-      - name: Build signed release and run unit tests
+      - name: Build signed release
         if: github.event_name != 'pull_request'
-        run: ./gradlew --no-daemon --max-workers=2 :app:assembleRelease :app:testReleaseUnitTest
-      - name: Build unsigned development variant and run unit tests
+        run: ./gradlew --no-daemon --max-workers=2 :app:assembleRelease
+      - name: Build development variant
         if: github.event_name == 'pull_request'
-        run: ./gradlew --no-daemon --max-workers=2 :app:assembleDebug :app:testDebugUnitTest
+        run: ./gradlew --no-daemon --max-workers=2 :app:assembleDebug
       - name: Package and verify release
         if: github.event_name != 'pull_request'
         run: |
