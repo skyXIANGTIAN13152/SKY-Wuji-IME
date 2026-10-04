@@ -28,6 +28,10 @@ for image in set(re.findall(r'cherry-v5/[a-zA-Z0-9_.-]+\.png', patch)):
 assert hashlib.sha256((RIME / 'fonts/sky-preview-microphone-v6.ttf').read_bytes()).hexdigest() == 'c7bfa207b21ab1a3e67f820abd898ecf884e12d25f026c44603cf18984219082'
 assert (RIME / 'custom_phrase.txt').read_text(encoding='utf-8').startswith('# User-defined phrases.')
 assert 'schema: rime_ice' in (RIME / 'default.custom.yaml').read_text(encoding='utf-8')
+theme_prefs = (ROOT / 'app/src/main/java/com/osfans/trime/data/theme/ThemePrefs.kt').read_text(encoding='utf-8')
+default_theme = re.search(r'SELECTED_THEME,\s*"([^"]+)"', theme_prefs).group(1)
+assert (ROOT / 'app/src/main/assets/shared' / f'{default_theme}.yaml').is_file(), 'Default theme must resolve to an actual bundled theme'
+assert (RIME / f'{default_theme}.custom.yaml').is_file(), 'Default theme must load the approved customization'
 
 for apk in map(Path, sys.argv[1:]):
     with zipfile.ZipFile(apk) as archive:
