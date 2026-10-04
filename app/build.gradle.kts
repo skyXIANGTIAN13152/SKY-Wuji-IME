@@ -22,11 +22,11 @@ android {
     buildToolsVersion = "36.0.0"
 
     defaultConfig {
-        applicationId = "com.osfans.trime"
+        applicationId = "io.github.skyxiangtian13152.skywuji"
         minSdk = 21
         targetSdk = 36
-        versionCode = 20260901
-        versionName = "3.3.12"
+        versionCode = 10000
+        versionName = "1.0.0"
 
         multiDexEnabled = true
         buildConfigField("String", "BUILDER", "\"${project.builder}\"")

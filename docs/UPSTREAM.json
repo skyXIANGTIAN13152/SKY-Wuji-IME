@@ -1,0 +1,22 @@
+{
+  "trime": {
+    "repository": "https://github.com/osfans/trime",
+    "commit": "e09ac7114fa067904ed358e82d499516cb423ff4",
+    "version": "3.3.12"
+  },
+  "rime_ice": {
+    "repository": "https://github.com/iDvel/rime-ice",
+    "commit": "3aea6d3694fb3d94ec663641f021f788822897ad"
+  },
+  "theme": {
+    "repository": "https://github.com/SivanLaai/rime-pure",
+    "original_author": "小先生",
+    "name": "CHERRY-红白-机械键盘-小先生［同文版］",
+    "approved_revision": 6
+  },
+  "voice": {
+    "repository": "https://github.com/BryceWG/BiBi-Keyboard",
+    "package": "com.brycewg.asrkb",
+    "bundled": false
+  }
+}

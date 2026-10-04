@@ -19,7 +19,7 @@ class ThemePrefs(
         string(
             R.string.selected_theme,
             SELECTED_THEME,
-            "trime",
+            "tongwenfeng",
             R.string.selected_theme_summary,
         )
 
@@ -27,7 +27,7 @@ class ThemePrefs(
         string(
             R.string.normal_mode_color,
             NORMAL_MODE_COLOR,
-            "default",
+            "so_young",
             R.string.normal_mode_color_summary,
         )
 

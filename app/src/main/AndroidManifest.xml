@@ -15,9 +15,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
     <application
         android:name="com.osfans.trime.TrimeApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_app_icon"
+        android:icon="@drawable/sky_app_icon"
         android:label="@string/trime_app_name"
-        android:roundIcon="@mipmap/ic_app_icon_round"
+        android:roundIcon="@drawable/sky_app_icon"
         android:theme="@style/Theme.TrimeAppTheme"
         android:hasFragileUserData="true"
         tools:targetApi="29">

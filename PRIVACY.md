@@ -1,29 +1,9 @@
-<!--
-SPDX-FileCopyrightText: 2015 - 2024 Rime community
+# SKY.无极输入法隐私说明
 
-SPDX-License-Identifier: GPL-3.0-or-later
--->
+本版键盘在 Android 设备本地处理输入，没有申请 INTERNET 权限，不自行向服务端发送输入内容。
 
-## 隱私權政策
+输入习惯、用户词频和启用的剪贴板历史保存在本机应用数据中。Android 系统备份和用户自行配置的导出、同步受各自设置控制。
 
-**同文**爲開源安卓漢語輸入法項目，讀取以下資訊是爲了協助使用者更快速的輸入文字。
-應用本身不會蒐集和上傳任何個人隱私數據至任何外部服務和伺服器，尤其用戶的輸入數據。
+语音通过切换到用户安装并启用的独立语音输入法完成。说点啥是否联网、使用哪种模型、如何保存音频，取决于该应用及用户选择；SKY.无极不内置语音识别模型。
 
-讀取如下資訊和權限：
-
-* 存儲空間：用於保存用戶詞典數據和配置信息。
-* 麥克風：用於系統語音輸入，如不需要可關閉。
-
-2017年7月25日更新
-
-## Privacy Policy
-
-**TRIME** is an open source project for Android input method.
-It won't collect or upload any user's privacy to any external service or server especially the user's input history.
-
-Permissions application needs:
-
-* Storage(NEED): Used to keep the dictionary data and configuration file.
-* Microphone(OPTIONAL): Used for voice input. 
-
-Updated on 2017.7.25
+公开安装包不携带维护者的设备数据、私人短语、账号、录音或凭证。

@@ -104,7 +104,7 @@ class AppPrefs(
         val preferredVoiceInput = list(
             R.string.preferred_voice_input,
             PREFERRED_VOICE_INPUT,
-            "",
+            "com.brycewg.asrkb",
             { InputMethodUtils.voiceInputMethods().map { it.first.packageName } },
             { ctx ->
                 InputMethodUtils.voiceInputMethods().map { it.first.loadLabel(ctx.packageManager) }
@@ -372,7 +372,7 @@ class AppPrefs(
             const val USER_DB_MIGRATED = "profile_user_db_migrated"
         }
 
-        val dataStorageMode = enum(R.string.data_storage_mode, DATA_STORAGE_MODE, DataStorageMode.EXTERNAL_SYNC)
+        val dataStorageMode = enum(R.string.data_storage_mode, DATA_STORAGE_MODE, DataStorageMode.APP_STORAGE)
         val externalRimeTreeUri = string(EXTERNAL_RIME_TREE_URI, "")
         val externalRimeDisplayName = string(EXTERNAL_RIME_DISPLAY_NAME, "")
         val userDbMigrated = bool(USER_DB_MIGRATED, false)

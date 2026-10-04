@@ -39,7 +39,7 @@ open class NativeBaseConventionPlugin : Plugin<Project> {
 
             splits.abi {
                 isEnable = true
-                isUniversalApk = false
+                isUniversalApk = true
                 reset()
                 (target.buildAbiOverride?.split(",") ?: Versions.supportedAbis).forEach {
                     include(it)

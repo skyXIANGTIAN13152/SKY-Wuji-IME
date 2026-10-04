@@ -481,3 +481,11 @@ app/src/main/jni/boost/
 # kotlin
 .kotlin
 
+
+# SKY signing and private device data
+*.p12
+*.pfx
+*.userdb*
+installation.yaml
+user.yaml
+private/

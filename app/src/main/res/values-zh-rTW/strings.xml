@@ -7,8 +7,8 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- 輸入法平臺名稱  -->
-    <string name="app_name_release">同文輸入法</string>
-    <string name="app_name_debug">同文輸入法（除錯模式）</string>
+    <string name="app_name_release">SKY.无极输入法</string>
+    <string name="app_name_debug">SKY.无极输入法 (Debug)</string>
     <!-- Preference settings -->
     <string name="qq_group_1">同文 QQ 羣 1</string>
     <string name="qq_group_2">同文 QQ 羣 2</string>
@@ -242,7 +242,7 @@
     <string name="wide_or_landscape">寬屏或橫屏</string>
     <string name="always">始終</string>
     <string name="preferred_voice_input">首選語音輸入</string>
-    <string name="no_voice_input_installed">尚未安裝語音輸入</string>
+    <string name="no_voice_input_installed">请先安装并启用「说点啥」，再使用语音输入。</string>
     <string name="inline_suggestions">顯示內嵌自動填充建議</string>
     <string name="update_config">更新配置</string>
     <string name="share">分享</string>

@@ -1,0 +1,88 @@
+name: Build SKY Wuji
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sky-wuji-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      BUILD_ABI: armeabi-v7a,arm64-v8a
+      BUILD_VERSION_NAME: 1.0.0
+      CI_NAME: SKY.RuoShuiJun
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: gradle
+      - uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4
+      - name: Validate bundled configuration
+        run: python3 script/check-sky-bundle.py
+      - name: Prepare verified upstream JNI libraries
+        run: python3 script/fetch-upstream-native.py
+      - name: Prepare release signature
+        if: github.event_name != 'pull_request'
+        env:
+          SKY_KEY: ${{ secrets.SKY_SIGNING_KEY }}
+          SKY_PASSWORD: ${{ secrets.SKY_SIGNING_PASSWORD }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          key = os.environ['SKY_KEY']
+          password = os.environ['SKY_PASSWORD']
+          if not key or not password:
+              raise SystemExit('Release signing secrets are required')
+          Path('keystore.properties').write_text(
+              f'keyBase64={key}\nstorePassword={password}\nkeyAlias=skywuji\nkeyPassword={password}\n'
+          )
+          PY
+      - name: Build signed release and run unit tests
+        if: github.event_name != 'pull_request'
+        run: ./gradlew --no-daemon --max-workers=2 :app:assembleRelease :app:testReleaseUnitTest
+      - name: Build unsigned development variant and run unit tests
+        if: github.event_name == 'pull_request'
+        run: ./gradlew --no-daemon --max-workers=2 :app:assembleDebug :app:testDebugUnitTest
+      - name: Package and verify release
+        if: github.event_name != 'pull_request'
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/release/*universal*.apk dist/SKY-Wuji-IME-1.0.0.apk
+          python3 script/check-sky-bundle.py dist/SKY-Wuji-IME-1.0.0.apk
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs dist/SKY-Wuji-IME-1.0.0.apk > dist/signature.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging dist/SKY-Wuji-IME-1.0.0.apk > dist/apk-info.txt
+          cd dist
+          sha256sum SKY-Wuji-IME-1.0.0.apk > SHA256SUMS.txt
+      - name: Upload release candidate
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: sky-wuji-release-candidate
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload development APK
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: sky-wuji-debug
+          path: app/build/outputs/apk/debug/*universal*.apk
+          if-no-files-found: error
+          retention-days: 14
