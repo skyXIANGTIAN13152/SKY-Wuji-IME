@@ -12,6 +12,13 @@ SPDX-License-Identifier: GPL-3.0-or-later
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- Discover enabled voice IMEs on Android 11 and later. -->
+    <queries>
+        <intent>
+            <action android:name="android.view.InputMethod" />
+        </intent>
+    </queries>
+
     <application
         android:name="com.osfans.trime.TrimeApplication"
         android:allowBackup="true"
