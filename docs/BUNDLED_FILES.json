@@ -42,7 +42,7 @@
     "lua/cold_word_drop/reduce_freq_words.lua": "2124f57446510ceae3ed5f8383237fdcaec68e54cfd0d66218b14f4f011872ca",
     "lua/cold_word_drop/string.lua": "a84155b7fe1e6f3f1eed6cfa89efa3b72536d37d37f8b47674cdc4472a44ab16",
     "lua/convert_ar_num_to_zh.lua": "858f0fad1b9d2fbe1f065f1015e32699ec32e174bb14d80ba88c45614ad616f0",
-    "lua/corrector.lua": "e9d7a25a1f71473d5e0b7195a1b190ff96d0ad12f4f7bcddcf1df41fa835e051",
+    "lua/corrector.lua": "8a90e85b73549c435902c0b49580420d64e45596c2794e40afb1d4803df1322c",
     "lua/date_translator.lua": "025de762f549b2b1a922f695a0f6b196824092455090a6e143c3d4c15ba56712",
     "lua/debuger.lua": "833af467f40a6c84332788ae0e8ab18b761da5d81972b6f35492f5ec6ce15a65",
     "lua/en_spacer.lua": "8bcda9df7bff13a69d429fc4119db3532a7aeb2360dbc0a401937f2c3c6231d4",
@@ -68,10 +68,10 @@
     "radical_pinyin.dict.yaml": "298bb907aff1d17fdc34e097f35dcfd3547e8a28d2640fa2c87340ce7e2ce058",
     "radical_pinyin.schema.yaml": "e5e0c5740a0114fb560870d95ff1efffd0a3951496268b98c9e8a43fdc52b240",
     "rime_ice.dict.yaml": "30fa643eec7af585cffacdd9bb6556ce4d17a0e848b83ea1fca3fdcfc5891595",
-    "rime_ice.schema.yaml": "ec4b0dd02ac287f53fe401f315cde648913eb60bb8cf8d9a8a613d1eb4f9698b",
+    "rime_ice.schema.yaml": "ad73d565b843cc31789a99574862b34b1607373bad6923195c32205289045fd4",
     "symbols_caps_v.yaml": "1423988324bd447535810f0dbcbc71b228eef821be2c122511707c0c7d4e684a",
     "symbols_v.yaml": "00aa27e61b8cb886b048561cbe353997cbd183a8c0b37fcc9f0439b89e80c4be",
-    "tongwenfeng.trime.custom.yaml": "658d6e15edc9f26f6797310b3cc0b67fb2626edd7fe982ab6ac44b3300231c48"
+    "tongwenfeng.trime.custom.yaml": "76f40062779c73a2c4a577a537111fd3584b85f91a886f70afb8a4b1facca4c2"
   },
-  "bytes": 51843657
+  "bytes": 52563822
 }

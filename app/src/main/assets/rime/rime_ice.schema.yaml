@@ -283,7 +283,9 @@ recognizer:
 key_binder:
   import_preset: default  # 从 default.yaml 继承通用的
   search: "`"             # 辅码引导符，要添加到 speller/alphabet
-  # bindings:             # 也可以再增加方案专有的快捷键
+  bindings:
+    - {when: always, accept: Control+Shift+5, set_option: ascii_mode}
+    - {when: always, accept: Control+Shift+6, unset_option: ascii_mode}
 
 
 # editor 用来定制操作键的行为，以下是默认行为 https://github.com/rime/librime/blob/master/src/rime/gear/editor.cc

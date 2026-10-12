@@ -168,11 +168,11 @@ class AppPrefs(
             ALWAYS(R.string.always),
         }
 
-        val landscapeMode = enum(R.string.enable_landscape_mode, LANDSCAPE_MODE, LandscapeMode.NEVER)
+        val landscapeMode = enum(R.string.enable_landscape_mode, LANDSCAPE_MODE, LandscapeMode.LANDSCAPE)
         val splitSpacePercent = int(
             R.string.split_space_percent,
             SPLIT_SPACE_PERCENT,
-            100,
+            0,
             0,
             200,
             "%",
@@ -331,7 +331,7 @@ class AppPrefs(
         )
 
         val hookCtrlA = switch(R.string.hook_ctrl_a, HOOK_CTRL_A, false)
-        val hookCtrlCV = switch(R.string.hook_ctrl_cv, HOOK_CTRL_CV, false)
+        val hookCtrlCV = switch(R.string.hook_ctrl_cv, HOOK_CTRL_CV, true)
         val hookCtrlLR = switch(R.string.hook_ctrl_lr, HOOK_CTRL_LR, false)
         val hookCtrlZY = switch(R.string.hook_ctrl_zy, HOOK_CTRL_ZY, false)
         val hookShiftSpace = switch(R.string.hook_shift_space, HOOK_SHIFT_SPACE, false)

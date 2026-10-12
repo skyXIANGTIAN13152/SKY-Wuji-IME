@@ -23,11 +23,28 @@ assert 'label: 当前使用本地语音模型' not in patch
 assert 'preset_keys/hide_key_symbol: null' in patch
 assert 'preset_keys/hide_key_hint: null' in patch
 assert 'select: sky_help_home' in patch
+select_all = re.search(r'^  preset_keys/select_all:\n((?:    .*\n)+)', patch, re.M)
+assert select_all, 'Missing public select-all override'
+assert "text: '{Control+Home}{Control+Shift+End}'" in select_all.group(1)
+assert not re.search(r'^    (send|commit):', select_all.group(1), re.M), 'Select-all must not also send Ctrl+A or commit text'
+assert 'keys: [SKY_SYMBOL_BACK, SKY_SYMBOL_SPACE, SKY_SYMBOL_BACKSPACE, SKY_SYMBOL_ENTER, SKY_SYMBOL_CLIPBOARD]' in patch
+assert "preset_color_schemes/so_young/key_back_color: '0xffffffff'" in patch
+assert 'preset_keyboards/sky_land_default:' in patch
+assert 'preset_keyboards/sky_land_cn_default:' in patch
 for image in set(re.findall(r'cherry-v5/[a-zA-Z0-9_.-]+\.png', patch)):
     assert (RIME / 'backgrounds' / image).is_file(), image
 assert hashlib.sha256((RIME / 'fonts/sky-preview-microphone-v6.ttf').read_bytes()).hexdigest() == 'c7bfa207b21ab1a3e67f820abd898ecf884e12d25f026c44603cf18984219082'
 assert (RIME / 'custom_phrase.txt').read_text(encoding='utf-8').startswith('# User-defined phrases.')
 assert 'schema: rime_ice' in (RIME / 'default.custom.yaml').read_text(encoding='utf-8')
+schema = (RIME / 'rime_ice.schema.yaml').read_text(encoding='utf-8')
+assert 'accept: Control+Shift+5, set_option: ascii_mode' in schema
+assert 'accept: Control+Shift+6, unset_option: ascii_mode' in schema
+
+app_prefs = (ROOT / 'app/src/main/java/com/osfans/trime/data/prefs/AppPrefs.kt').read_text(encoding='utf-8')
+assert 'LANDSCAPE_MODE, LandscapeMode.LANDSCAPE)' in app_prefs
+assert 'SPLIT_SPACE_PERCENT,\n            0,' in app_prefs
+assert 'HOOK_CTRL_CV, true)' in app_prefs
+assert 'HOOK_CTRL_A, false)' in app_prefs
 theme_prefs = (ROOT / 'app/src/main/java/com/osfans/trime/data/theme/ThemePrefs.kt').read_text(encoding='utf-8')
 default_theme = re.search(r'SELECTED_THEME,\s*"([^"]+)"', theme_prefs).group(1)
 assert (ROOT / 'app/src/main/assets/shared' / f'{default_theme}.yaml').is_file(), 'Default theme must resolve to an actual bundled theme'

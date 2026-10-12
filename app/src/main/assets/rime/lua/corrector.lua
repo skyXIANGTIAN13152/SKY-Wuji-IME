@@ -107,7 +107,7 @@ function M.init(env)
         ["an hui liu an"] = { text = "安徽六安", comment = "ān huī lù ān" },
         ["an hui liu an shi"] = { text = "安徽六安市", comment = "ān huī lù ān shì" },
         ["nan jing liu he"] = { text = "南京六合", comment = "nán jīng lù hé" },
-        ["nan jing shi liu he"] = { text = "南京六合区", comment = "nán jīng lù hé qū" },
+        ["nan jing liu he qu"] = { text = "南京六合区", comment = "nán jīng lù hé qū" },
         ["nan jing shi liu he qu"] = { text = "南京市六合区", comment = "nán jīng shì lù hé qū" },
         ["nuo da"] = { text = "偌大", comment = "偌(ruò)大" },
         ["yin jiu zhi ke"] = { text = "饮鸩止渴", comment = "饮鸩(zhèn)止渴" },
