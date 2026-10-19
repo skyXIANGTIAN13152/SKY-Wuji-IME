@@ -98,8 +98,12 @@ object DataManager {
                 is DataDiff.CreateFile,
                 is DataDiff.UpdateFile,
                 -> {
-                    val destPath = sharedDataDir.resolveSibling(it.path).absolutePath
-                    ResourceUtils.copyFile(it.path, destPath)
+                    val destination = sharedDataDir.resolveSibling(it.path)
+                    if (BundledUserDataPolicy.shouldCopy(it.path, destination, oldChecksums.files[it.path])) {
+                        ResourceUtils.copyFile(it.path, destination.absolutePath)
+                    } else {
+                        Timber.i("Preserving customized user data: ${it.path}")
+                    }
                 }
                 is DataDiff.DeleteDir,
                 is DataDiff.DeleteFile,

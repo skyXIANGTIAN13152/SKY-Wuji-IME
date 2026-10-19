@@ -2,14 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - SKY.无极 keyboard fixes, 2026-10-12
+## [1.0.2] - 2026-10-20
 
+- Publish a source-built application update with version code 10002 and the existing project signer.
+- Preserve the Android input-method visibility query and verify it in every release APK together with package, version, and signer identity. The runtime query was already present in SKY.无极 1.0.0.
+- Preserve customized or externally imported user-directory files when bundled assets change; update only unchanged shipped copies. Verify this policy with 11 pure-JVM temporary-file cases.
 - Fix More panel labels and overflowing clipboard card backgrounds.
 - Add compact landscape layouts and preserve the portrait V6 appearance.
 - Correct symbol shortcuts, date and arrow actions, Chinese return behavior, and the 南京六合区 pronunciation lookup.
 - Select the complete document with Ctrl+Home followed by Ctrl+Shift+End, covering long-press A and editor select-all in WeChat. Commit pending composition before selecting.
 - Enable native copy/cut/paste handling and landscape mode by default for new preferences; retain existing saved settings.
-- See [validation and upgrade notes](docs/KEYBOARD_FIXES_2026-10-12.md). The existing 1.0.0 release APK is unchanged.
+- Include the previously source-only October 12 fixes described in [validation and upgrade notes](docs/KEYBOARD_FIXES_2026-10-12.md). The historical 1.0.0 release APK is unchanged.
 
 ## [3.3.12] - 2026-09-01
 

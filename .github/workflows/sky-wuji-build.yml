@@ -17,7 +17,6 @@ jobs:
     timeout-minutes: 45
     env:
       BUILD_ABI: armeabi-v7a,arm64-v8a
-      BUILD_VERSION_NAME: 1.0.0
       CI_NAME: SKY.RuoShuiJun
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -31,6 +30,8 @@ jobs:
           java-version: '25'
           cache: gradle
       - uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4
+      - name: Read and validate release metadata
+        run: python3 script/check-release-metadata.py --github-env "$GITHUB_ENV"
       - name: Validate bundled configuration
         run: python3 script/check-sky-bundle.py
       - name: Prepare verified upstream JNI libraries
@@ -58,16 +59,20 @@ jobs:
       - name: Build development variant
         if: github.event_name == 'pull_request'
         run: ./gradlew --no-daemon --max-workers=2 :app:assembleDebug
+      - name: Verify user data survives bundled configuration upgrades
+        run: python3 script/check-user-data-upgrade.py
       - name: Package and verify release
         if: github.event_name != 'pull_request'
         run: |
           mkdir -p dist
-          cp app/build/outputs/apk/release/*universal*.apk dist/SKY-Wuji-IME-1.0.0.apk
-          python3 script/check-sky-bundle.py dist/SKY-Wuji-IME-1.0.0.apk
-          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs dist/SKY-Wuji-IME-1.0.0.apk > dist/signature.txt
-          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging dist/SKY-Wuji-IME-1.0.0.apk > dist/apk-info.txt
+          apk="dist/SKY-Wuji-IME-${BUILD_VERSION_NAME}.apk"
+          cp app/build/outputs/apk/release/*universal*.apk "$apk"
+          python3 script/check-sky-bundle.py "$apk"
+          python3 script/check-release-metadata.py "$apk" --aapt "$ANDROID_HOME/build-tools/36.0.0/aapt" --apksigner "$ANDROID_HOME/build-tools/36.0.0/apksigner" > dist/release-metadata.txt
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs "$apk" > dist/signature.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging "$apk" > dist/apk-info.txt
           cd dist
-          sha256sum SKY-Wuji-IME-1.0.0.apk > SHA256SUMS.txt
+          sha256sum "SKY-Wuji-IME-${BUILD_VERSION_NAME}.apk" > SHA256SUMS.txt
       - name: Upload release candidate
         if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
